@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { getRecentPosts, getSimilarPosts } from '@/services';
-import Image from 'next/future/image';
 import Link from 'next/link';
 import { Post } from '@/interfaces';
 
-type RelatedPostQuery = Omit<Post, 'excerpt' | 'content'>;
+type RelatedPostQuery = Omit<Post, 'excerpt' | 'content' | 'featuredImage'>;
 
 export default function PostWidget({
   categories,
@@ -30,15 +29,6 @@ export default function PostWidget({
       </h3>
       {widgetPosts.map((post) => (
         <div key={post.title} className="flex items-center w-full mb-4">
-          <div className="w-16 flex-none">
-            <Image
-              className="align-middle rounded-full"
-              src={post.featuredImage.url}
-              alt={post.title}
-              width="64"
-              height="64"
-            />
-          </div>
           <div className="flex-grow ml-4">
             <p className="text-gray-500 font-xs">
               {moment(post.createdAt).format(`MMM DD, YYYY`)}

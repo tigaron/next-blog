@@ -9,7 +9,7 @@ type AllPostsQuery = {
   };
 };
 
-type RelatedPostQuery = Omit<Post, 'excerpt' | 'content'>;
+type RelatedPostQuery = Omit<Post, 'excerpt' | 'content' | 'featuredImage'>;
 
 export async function getPosts() {
   const query = gql`
@@ -88,9 +88,6 @@ export async function getRecentPosts() {
       last: 3
     ) {
       title
-      featuredImage {
-        url
-      }
       createdAt
       slug
     }
@@ -114,9 +111,6 @@ export async function getSimilarPosts(categories: string[], slug: string) {
         last: 3
       ) {
         title
-        featuredImage {
-          url
-        }
         createdAt
         slug
       }

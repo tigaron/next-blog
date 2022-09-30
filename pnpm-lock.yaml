@@ -3,12 +3,15 @@ lockfileVersion: 5.4
 specifiers:
   '@commitlint/cli': 17.1.2
   '@commitlint/config-conventional': 17.1.0
+  '@graphcms/rich-text-react-renderer': 0.6.1
+  '@graphcms/rich-text-types': 0.5.0
   '@types/node': 16.11.59
   '@types/react': 18.0.21
   '@types/react-dom': 18.0.6
   '@typescript-eslint/eslint-plugin': 5.38.0
   '@typescript-eslint/parser': 5.38.0
   autoprefixer: 10.4.12
+  disqus-react: 1.1.3
   eslint: 8.24.0
   eslint-config-next: 12.3.1
   eslint-config-prettier: 8.5.0
@@ -32,6 +35,8 @@ specifiers:
   typescript: 4.8.3
 
 dependencies:
+  '@graphcms/rich-text-react-renderer': 0.6.1_biqbaboplfbrettd7655fr4n2y
+  disqus-react: 1.1.3_biqbaboplfbrettd7655fr4n2y
   graphql: 16.6.0
   graphql-request: 5.0.0_graphql@16.6.0
   html-react-parser: 3.0.4_react@18.2.0
@@ -45,6 +50,7 @@ dependencies:
 devDependencies:
   '@commitlint/cli': 17.1.2
   '@commitlint/config-conventional': 17.1.0
+  '@graphcms/rich-text-types': 0.5.0
   '@types/node': 16.11.59
   '@types/react': 18.0.21
   '@types/react-dom': 18.0.6
@@ -287,6 +293,24 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /@graphcms/rich-text-react-renderer/0.6.1_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-w0OtKf9Fzmf0vI5bzgR502AndRLEeRlmb8x6nxUweDhfNRVKTOiwSEQKetMPpodSZUnXO+PI8J7rqxQvJof2kA==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: '>=16'
+      react-dom: '>=16'
+    dependencies:
+      '@graphcms/rich-text-types': 0.5.0
+      escape-html: 1.0.3
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /@graphcms/rich-text-types/0.5.0:
+    resolution: {integrity: sha512-3oKVp2V1f9zYn9dYpLvePeu/8w8nQhZyv3FWm7yUtY/AlVXRwU3HJtIXvvdwAkmTuNANNhcDkBOzfkZaKJNADw==}
+    dependencies:
+      tslib: 2.4.0
 
   /@graphql-typed-document-node/core/3.1.1_graphql@16.6.0:
     resolution: {integrity: sha512-NQ17ii0rK1b34VZonlmT2QMJFI70m0TRwbknO/ihlbatXyaktDhN/98vBiUU6kNBPljqGqyIrl2T4nY2RpFANg==}
@@ -1297,6 +1321,16 @@ packages:
       path-type: 4.0.0
     dev: true
 
+  /disqus-react/1.1.3_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-DwKdmbHTMPyhBECBeRYAPNcIqZNKMvsRiyVdF89BdmFCbZpWb7+xMj/lvAuckBSx1ilOHpTKYYyW11uodaJ6ig==}
+    peerDependencies:
+      react: ^15.6.1 || ^16.0.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^15.6.1 || ^16.0.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
   /dlv/1.1.3:
     resolution: {integrity: sha512-+HlytyjlPKnIG8XuRG8WvmBP8xs8P71y+SKKS6ZXWoEgLuePxtDoUEiH7WkdePWrQ5JBpE6aoVqfZfJUQkjXwA==}
     dev: true
@@ -1432,6 +1466,10 @@ packages:
     resolution: {integrity: sha512-k0er2gUkLf8O0zKJiAhmkTnJlTvINGv7ygDNPbeIsX/TJjGJZHuh9B2UxbsaEkmlEo9MfhrSzmhIlhRlI2GXnw==}
     engines: {node: '>=6'}
     dev: true
+
+  /escape-html/1.0.3:
+    resolution: {integrity: sha512-NiSupZ4OeuGwr68lGIeym/ksIZMJodUGOSCZ/FSnTxcrekbvqrgdUxlJOMpijaKZVjAJrWrGs/6Jy8OMuyj9ow==}
+    dev: false
 
   /escape-string-regexp/1.0.5:
     resolution: {integrity: sha512-vbRorB5FUQWvla16U8R/qgaFIya2qGzwDrNmCZuYKrbdSUMG6I1ZCGQRefkRVhuOkIGVne7BQ35DSfo1qvJqFg==}
