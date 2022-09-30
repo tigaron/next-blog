@@ -1,9 +1,9 @@
-import { PostNode } from '@/interfaces';
+import { Category, Post, PostNode } from '@/interfaces';
 import { request, gql } from 'graphql-request';
 
 const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT as string;
 
-type PostsQuery = {
+type AllPostsQuery = {
   postsConnection: {
     edges: PostNode[];
   };
@@ -39,6 +39,65 @@ export const getPosts = async () => {
       }
     }
   `;
-  const result: PostsQuery = await request(graphqlAPI, query);
+  const result: AllPostsQuery = await request(graphqlAPI, query);
   return result.postsConnection.edges;
+};
+
+export const getRecentPosts = async () => {
+  const query = gql`
+  query GetRecentPosts() {
+    posts(
+      orderBy: createdAt_ASC
+      last: 3
+    ) {
+      title
+      featuredImage {
+        url
+      }
+      createdAt
+      slug
+    }
+  }
+  `;
+  const { posts }: { posts: Post[] } = await request(graphqlAPI, query);
+  return posts;
+};
+
+export const getSimilarPosts = async () => {
+  const query = gql`
+    query GetSimilarPosts($slug: String!, $categories: [String!]) {
+      posts(
+        where: {
+          slug_not: $slug
+          AND: { categories_some: { slug_in: $categories } }
+        }
+        last: 3
+      ) {
+        title
+        featuredImage {
+          url
+        }
+        createdAt
+        slug
+      }
+    }
+  `;
+  const { posts }: { posts: Post[] } = await request(graphqlAPI, query);
+  return posts;
+};
+
+export const getCategories = async () => {
+  const query = gql`
+    query GetCategories {
+      categories {
+        name
+        slug
+      }
+    }
+  `;
+  const { categories }: { categories: Category[] } = await request(
+    graphqlAPI,
+    query,
+  );
+  return categories;
 };

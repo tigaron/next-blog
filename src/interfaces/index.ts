@@ -2,7 +2,7 @@ export type Post = {
   title: string;
   slug: string;
   excerpt: string;
-  cratedAt: string;
+  createdAt: string;
   featuredImage: {
     url: string;
   };
@@ -28,3 +28,5 @@ export type PostNode = {
     categories: Category;
   };
 };
+
+export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;

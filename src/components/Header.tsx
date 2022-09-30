@@ -1,10 +1,11 @@
-import { Category } from '@/interfaces';
 import Link from 'next/link';
 import React from 'react';
 
-const categories: Category[] = [
-  { name: `React`, slug: `react` },
-  { name: `Web Development`, slug: `webdev` },
+const navigation = [
+  { name: `Library`, slug: `/library` },
+  { name: `Project`, slug: `/project` },
+  { name: `Blog`, slug: `/blog` },
+  { name: `Home`, slug: `/` },
 ];
 
 const Header = () => {
@@ -19,10 +20,10 @@ const Header = () => {
           </Link>
         </div>
         <div className="hidden md:float-left md:contents">
-          {categories.map((category) => (
-            <Link key={category.slug} href={`/categories/${category.slug}`}>
+          {navigation.map((item) => (
+            <Link key={item.slug} href={`${item.slug}`}>
               <span className="md:float-right mt-2 align-middle text-white ml-4 font-semibold cursor-pointer">
-                {category.name}
+                {item.name}
               </span>
             </Link>
           ))}
