@@ -8,7 +8,7 @@ const navigation = [
   { name: `Home`, slug: `/` },
 ];
 
-const Header = () => {
+export default function Header() {
   return (
     <div className="container mx-auto px-10 mb-8">
       <div className="border-b w-full inline-block border-blue-400 py-8">
@@ -31,6 +31,4 @@ const Header = () => {
       </div>
     </div>
   );
-};
-
-export default Header;
+}
