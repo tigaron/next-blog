@@ -5,13 +5,13 @@ import Image from 'next/future/image';
 import Link from 'next/link';
 import { Post } from '@/interfaces';
 
-type Props = {
-  categories: string[];
-  slug: string;
-};
+type RelatedPostQuery = Omit<Post, 'excerpt' | 'content'>;
 
-const PostWidget = ({ categories, slug }: Props) => {
-  const [widgetPosts, setWidgetPosts] = useState<Post[]>([]);
+export default function PostWidget({
+  categories,
+  slug,
+}: { categories: string[]; slug: string } | Record<string, never>) {
+  const [widgetPosts, setWidgetPosts] = useState<RelatedPostQuery[]>([]);
 
   useEffect(() => {
     if (slug) {
@@ -49,6 +49,4 @@ const PostWidget = ({ categories, slug }: Props) => {
       ))}
     </div>
   );
-};
-
-export default PostWidget;
+}

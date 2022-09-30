@@ -6,6 +6,9 @@ export type Post = {
   featuredImage: {
     url: string;
   };
+  content: {
+    raw: string;
+  };
 };
 
 export type Category = {
@@ -22,11 +25,16 @@ export type Author = {
   };
 };
 
-export type PostNode = {
-  node: Post & {
-    author: Author;
-    categories: Category;
-  };
+export type PostDetail = Post & {
+  author: Author;
+  categories: Category[];
 };
 
-export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
+export type PostCardDetail = Omit<Post, 'content'> & {
+  author: Author;
+  categories: Category[];
+};
+
+export type PostNode = {
+  node: PostCardDetail;
+};

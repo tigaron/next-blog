@@ -1,4 +1,4 @@
-import { Category, Post, PostNode } from '@/interfaces';
+import { Category, Post, PostDetail, PostNode } from '@/interfaces';
 import { request, gql } from 'graphql-request';
 
 const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT as string;
@@ -9,7 +9,9 @@ type AllPostsQuery = {
   };
 };
 
-export const getPosts = async () => {
+type RelatedPostQuery = Omit<Post, 'excerpt' | 'content'>;
+
+export async function getPosts() {
   const query = gql`
     query Posts {
       postsConnection {
@@ -41,9 +43,44 @@ export const getPosts = async () => {
   `;
   const result: AllPostsQuery = await request(graphqlAPI, query);
   return result.postsConnection.edges;
-};
+}
 
-export const getRecentPosts = async () => {
+export async function getPostDetails(slug: string) {
+  const query = gql`
+    query GetPostDetails($slug: String!) {
+      post(where: { slug: $slug }) {
+        author {
+          bio
+          name
+          id
+          photo {
+            url
+          }
+        }
+        slug
+        createdAt
+        title
+        excerpt
+        featuredImage {
+          url
+        }
+        categories {
+          name
+          slug
+        }
+        content {
+          raw
+        }
+      }
+    }
+  `;
+  const { post }: { post: PostDetail } = await request(graphqlAPI, query, {
+    slug,
+  });
+  return post;
+}
+
+export async function getRecentPosts() {
   const query = gql`
   query GetRecentPosts() {
     posts(
@@ -59,11 +96,14 @@ export const getRecentPosts = async () => {
     }
   }
   `;
-  const { posts }: { posts: Post[] } = await request(graphqlAPI, query);
+  const { posts }: { posts: RelatedPostQuery[] } = await request(
+    graphqlAPI,
+    query,
+  );
   return posts;
-};
+}
 
-export const getSimilarPosts = async () => {
+export async function getSimilarPosts(categories: string[], slug: string) {
   const query = gql`
     query GetSimilarPosts($slug: String!, $categories: [String!]) {
       posts(
@@ -82,11 +122,15 @@ export const getSimilarPosts = async () => {
       }
     }
   `;
-  const { posts }: { posts: Post[] } = await request(graphqlAPI, query);
+  const { posts }: { posts: RelatedPostQuery[] } = await request(
+    graphqlAPI,
+    query,
+    { categories, slug },
+  );
   return posts;
-};
+}
 
-export const getCategories = async () => {
+export async function getCategories() {
   const query = gql`
     query GetCategories {
       categories {
@@ -100,4 +144,4 @@ export const getCategories = async () => {
     query,
   );
   return categories;
-};
+}

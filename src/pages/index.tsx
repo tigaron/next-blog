@@ -5,11 +5,7 @@ import { PostNode } from '@/interfaces';
 import { getPosts } from '@/services';
 import Head from 'next/head';
 
-type Props = {
-  posts: PostNode[];
-};
-
-export default function Home({ posts }: Props) {
+export default function Home({ posts }: { posts: PostNode[] }) {
   return (
     <div className="container mx-auto px-10 mb-8">
       <Head>
